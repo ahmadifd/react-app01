@@ -1,69 +1,26 @@
-import Navbar from "./components/functional/navbar";
-import Products from "./components/functional/products";
-import { useContext, useState, useEffect } from "react";
-import productContext from "./context/products";
+import Navbar from "./components/navbar";
+import Users from "./components/users";
+import Login from "./components/login";
+import Register from "./components/register";
+import Home from "./components/home";
+
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Route, Routes } from "react-router-dom";
 
 function App() {
-  const [allproducts, setallProducts] = useState([
-    { id: 1, productCount: 2, productName: "laptop" },
-    { id: 2, productCount: 3, productName: "phone" },
-    { id: 3, productCount: 4, productName: "airpods" },
-  ]);
-
-  useEffect(() => {
-    console.log("app - mount");
-  }, []);
-  useEffect(() => {
-    console.log("app - mount | update");
-  });
-  useEffect(() => {
-    return () => {
-      console.log("app - unmount");
-    };
-  }, []);
   return (
     <>
-      <productContext.Provider
-        value={{
-          handleIncrement: handleIncrement,
-          handleDecrement: handleDecrement,
-          handleDelete: handleDelete,
-          resetProducts: resetProducts,
-          allproducts: allproducts,
-        }}
-      >
-        <Navbar />
-        <Products />
-      </productContext.Provider>
+      <Navbar />
+      <div className="container mt-3">
+        <Routes>
+          <Route path="/users" Component={Users} />
+          <Route path="/login" Component={Login} />
+          <Route path="/register" Component={Register} />
+          <Route path="/" Component={Home} />
+        </Routes>
+      </div>
     </>
   );
-  function handleIncrement(id) {
-    const ps = [...allproducts];
-    let p = ps.find((u) => u.id === id);
-    let cp = { ...p };
-    p.productCount++;
-    setallProducts(ps);
-  }
-  function handleDecrement(id) {
-    const updatedproducts = allproducts.map((x) => {
-      x.productCount = x.id === id ? x.productCount - 1 : x.productCount;
-      return x;
-    });
-    setallProducts(updatedproducts);
-  }
-
-  function handleDelete(id) {
-    const updatedproducts = allproducts.filter((x) => x.id !== id);
-    setallProducts(updatedproducts);
-  }
-
-  function resetProducts() {
-    const updatedproducts = allproducts.map((x) => {
-      x.productCount = 0;
-      return x;
-    });
-    setallProducts(updatedproducts);
-  }
 }
 
 export default App;
