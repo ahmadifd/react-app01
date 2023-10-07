@@ -2,15 +2,23 @@ import { useState } from "react";
 import "../product.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-const Product = ({ productName, productCount ,children}) => {
-  const [count, setCount] = useState(productCount);
+const Product = ({
+  handleIncrement,
+  handleDecrement,
+  handleDelete,
+  productName,
+  productCount,
+  children,
+  id,
+}) => {
   return (
     <div>
       <span className="m-2 text-info">{productName}</span>
       <span className="m-2 badge bg-primary">{format()}</span>
+
       <button
         onClick={() => {
-          handleIncrement();
+          handleIncrement(id);
         }}
         className="m-2 btn btn-sm btn-success"
       >
@@ -18,7 +26,7 @@ const Product = ({ productName, productCount ,children}) => {
       </button>
       <button
         onClick={() => {
-          handleDecrement();
+          handleDecrement(id);
         }}
         className="m-2 btn btn-sm btn-warning "
       >
@@ -26,7 +34,7 @@ const Product = ({ productName, productCount ,children}) => {
       </button>
       <button
         onClick={() => {
-          handleDelete(count, setCount);
+          handleDelete(id);
         }}
         className="m-2 btn btn-sm btn-danger"
       >
@@ -36,27 +44,10 @@ const Product = ({ productName, productCount ,children}) => {
     </div>
   );
 
-  function handleIncrement(itemnumber) {
-    setCount(count + 1);
-    window.setTimeout(handleIncrement0, 1, itemnumber);
-  }
-  function handleIncrement0(itemnumber) {
-    //console.log(this.state);
-  }
-
-  function handleDecrement(itemnumber) {
-    setCount(count - 1);
-    //console.log(this.state);
-  }
-
   function format() {
-    return count === 0 ? "zero" : count;
+    if (productCount === 0) return "zero";
+    else return productCount;
   }
 };
-
-function handleDelete(count, setCount) {
-  setCount(0);
-  //console.log(this.state);
-}
 
 export default Product;

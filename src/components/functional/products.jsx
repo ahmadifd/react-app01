@@ -1,23 +1,34 @@
 import Product from "./product";
 import "../product.css";
-import { useState } from "react";
 
-function Products() {
-  const [allproducts, setallProducts] = useState([
-    { id: 1, productCount: 2, productName: "laptop" },
-    { id: 2, productCount: 3, productName: "phone" },
-    { id: 3, productCount: 4, productName: "airpods" },
-  ]);
-
+function Products({
+  handleIncrement,
+  handleDecrement,
+  handleDelete,
+  resetProducts,
+  allproducts,
+}) {
   return (
     <>
+      <button className="btn btn-primary" onClick={resetProducts}>
+        Reset
+      </button>
       {allproducts.map((x, index) => {
         return (
-          <Product key={index} productCount={x.productCount} productName={x.productName}>
+          <Product
+            handleIncrement={handleIncrement}
+            handleDecrement={handleDecrement}
+            handleDelete={handleDelete}
+            resetProducts={resetProducts}
+            key={index}
+            productCount={x.productCount}
+            productName={x.productName}
+            id={x.id}
+          >
             <p>Hello Farshid</p>
           </Product>
         );
-      })}
+      })} 
     </>
   );
 }
