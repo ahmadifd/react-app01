@@ -1,25 +1,18 @@
 import Product from "./product";
 import "../product.css";
+import { useContext } from "react";
+import productContext from "../../context/products";
 
-function Products({
-  handleIncrement,
-  handleDecrement,
-  handleDelete,
-  resetProducts,
-  allproducts,
-}) {
+function Products() {
+  const pc = useContext(productContext);
   return (
     <>
-      <button className="btn btn-primary" onClick={resetProducts}>
+      <button className="btn btn-primary" onClick={pc.resetProducts}>
         Reset
       </button>
-      {allproducts.map((x, index) => {
+      {pc.allproducts.map((x, index) => {
         return (
           <Product
-            handleIncrement={handleIncrement}
-            handleDecrement={handleDecrement}
-            handleDelete={handleDelete}
-            resetProducts={resetProducts}
             key={index}
             productCount={x.productCount}
             productName={x.productName}
@@ -28,7 +21,7 @@ function Products({
             <p>Hello Farshid</p>
           </Product>
         );
-      })} 
+      })}
     </>
   );
 }

@@ -1,16 +1,11 @@
 import { useState } from "react";
 import "../product.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { useContext } from "react";
+import productContext from "../../context/products";
 
-const Product = ({
-  handleIncrement,
-  handleDecrement,
-  handleDelete,
-  productName,
-  productCount,
-  children,
-  id,
-}) => {
+const Product = ({ productName, productCount, children, id }) => {
+  const pc = useContext(productContext);
   return (
     <div>
       <span className="m-2 text-info">{productName}</span>
@@ -18,7 +13,7 @@ const Product = ({
 
       <button
         onClick={() => {
-          handleIncrement(id);
+          pc.handleIncrement(id);
         }}
         className="m-2 btn btn-sm btn-success"
       >
@@ -26,7 +21,7 @@ const Product = ({
       </button>
       <button
         onClick={() => {
-          handleDecrement(id);
+          pc.handleDecrement(id);
         }}
         className="m-2 btn btn-sm btn-warning "
       >
@@ -34,7 +29,7 @@ const Product = ({
       </button>
       <button
         onClick={() => {
-          handleDelete(id);
+          pc.handleDelete(id);
         }}
         className="m-2 btn btn-sm btn-danger"
       >
