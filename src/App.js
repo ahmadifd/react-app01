@@ -1,6 +1,6 @@
 import Navbar from "./components/functional/navbar";
 import Products from "./components/functional/products";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import productContext from "./context/products";
 
 function App() {
@@ -10,6 +10,17 @@ function App() {
     { id: 3, productCount: 4, productName: "airpods" },
   ]);
 
+  useEffect(() => {
+    console.log("app - mount");
+  }, []);
+  useEffect(() => {
+    console.log("app - mount | update");
+  });
+  useEffect(() => {
+    return () => {
+      console.log("app - unmount");
+    };
+  }, []);
   return (
     <>
       <productContext.Provider

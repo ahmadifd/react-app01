@@ -1,10 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "../product.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useContext } from "react";
 import productContext from "../../context/products";
 
 const Product = ({ productName, productCount, children, id }) => {
+  useEffect(() => {
+    console.log("product - mount");
+  }, []);
+  useEffect(() => {
+    console.log("product - mount | update");
+  });
+  useEffect(() => {
+    return () => {
+      console.log("product - unmount");
+    };
+  }, []);
   const pc = useContext(productContext);
   return (
     <div>

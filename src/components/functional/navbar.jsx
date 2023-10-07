@@ -1,9 +1,20 @@
 import productContext from "../../context/products";
-import { useContext } from "react";
+import { useContext ,useEffect} from "react";
 
 
 function Navbar() {
   const pc = useContext(productContext);
+  useEffect(() => {
+    console.log("navbar - mount");
+  }, []);
+  useEffect(() => {
+    console.log("navbar - mount | update");
+  });
+  useEffect(() => {
+    return () => {
+      console.log("navbar - unmount");
+    };
+  }, []);
 
   return (
     <nav className="navbar navbar-light bg-light">

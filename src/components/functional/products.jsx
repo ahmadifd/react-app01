@@ -1,9 +1,20 @@
 import Product from "./product";
 import "../product.css";
-import { useContext } from "react";
+import { useContext ,useEffect} from "react";
 import productContext from "../../context/products";
 
 function Products() {
+  useEffect(() => {
+    console.log("products - mount");
+  }, []);
+  useEffect(() => {
+    console.log("products - mount | update");
+  });
+  useEffect(() => {
+    return () => {
+      console.log("products - unmount");
+    };
+  }, []);
   const pc = useContext(productContext);
   return (
     <>
