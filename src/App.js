@@ -5,7 +5,7 @@ import Register from "./components/register";
 import Home from "./components/home";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Route, Routes } from "react-router-dom";
+import { Route, Router, Routes } from "react-router-dom";
 
 function App() {
   return (
@@ -13,10 +13,10 @@ function App() {
       <Navbar />
       <div className="container mt-3">
         <Routes>
-          <Route path="/users" Component={Users} />
-          <Route path="/login" Component={Login} />
-          <Route path="/register" Component={Register} />
-          <Route path="/" Component={Home} />
+          <Route path="/users" element={<Users />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/" element={<Home />} />
         </Routes>
       </div>
     </>
