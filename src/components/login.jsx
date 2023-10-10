@@ -2,12 +2,20 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useRef, useState } from "react";
 import axios from "axios";
 import * as yup from "yup";
+import { useEffect } from "react";
 
 const Login = () => {
   let email1 = useRef(null);
   let password1 = useRef(null);
-  const [account, setAccount] = useState({});
-  const { email, password } = account;
+
+  const [account, setAccount] = useState({ });
+
+  const { email, password, sending } = account;
+
+useEffect(()=>{
+  setAccount({...account , sending:false});
+  console.log(account);
+},[]);
 
   let schema = yup.object().shape({
     email: yup.string().email().required(),
@@ -50,13 +58,17 @@ const Login = () => {
             }}
           />
         </div>
-        <button className="btn btn-primary">Login</button>
+        <button disabled={sending} className="btn btn-primary ">
+          Login
+        </button>
       </form>
     </>
   );
 
   async function handleSubmit(event) {
     event.preventDefault();
+    setAccount({ ...account, sending: true });
+
     await validate();
   }
 
@@ -71,11 +83,12 @@ const Login = () => {
   }
 
   async function validate() {
-    try {
+      try {
       await schema.validate(account, { abortEarly: false });
+      console.log(account);
       try {
         await getApiResult();
-        setAccount({ ...account, errors: [] });
+        setAccount({ ...account, errors: []});
       } catch (er) {
         setAccount({ ...account, errors: [er.message] });
       }
