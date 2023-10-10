@@ -6,7 +6,7 @@ import { useLocation } from "react-router-dom";
 import queryString from "querystring";
 import { useNavigate } from "react-router-dom";
 
-const User = () => {
+const User = (props) => {
   const routeParams = useParams();
   const ulocation = useLocation();
   const navigate = useNavigate();
@@ -14,6 +14,7 @@ const User = () => {
   const [user, setuser] = useState({});
 
   useEffect(() => {
+    console.log(props);
     getApiResult();
     const qs = queryString.parse(ulocation.search);
     console.log(ulocation.search, qs["?order"], qs["s"]);
@@ -25,6 +26,7 @@ const User = () => {
     setuser(user1.data.data);
     console.log(navigate);
   }
+
   return (
     <div className="col-4 text-center p-5">
       <img

@@ -15,7 +15,7 @@ function App() {
       <Navbar />
       <div className="container mt-3">
         <Routes>
-          <Route path="/users/:id" element={<User />} />
+          <Route path="/users/:id" element={<User xxx={10} />} />
           <Route path="/users" element={<Users />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
@@ -28,5 +28,5 @@ function App() {
     </>
   );
 }
-
+// element={(props) => <User {...props} xxx='10' />}
 export default App;
