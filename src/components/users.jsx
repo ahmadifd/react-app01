@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import LoadingUsers from "./loading/loadingUsers";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from "./navbar";
+import { Link } from "react-router-dom";
 
 const Users = () => {
   const [allusers, setallusers] = useState([]);
@@ -38,9 +39,11 @@ const Users = () => {
                     style={{ borderRadius: "50%", width: "100px" }}
                     alt=""
                   />
-                  <h4>
-                    {item.first_name} {item.last_name}
-                  </h4>
+                  <Link to={`/Users/${item.id}`}>
+                    <h4>
+                      {item.first_name} {item.last_name}
+                    </h4>
+                  </Link>
                   <h5>{item.email}</h5>
                   <div className="row">
                     <div className="col-6">
