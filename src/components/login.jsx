@@ -3,23 +3,44 @@ import { useRef, useState } from "react";
 import axios from "axios";
 import * as yup from "yup";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import usersContext from "../context/userscontext";
+import { useContext } from "react";
 
-const Login = () => {
+const Login = ({ handleUser }) => {
+  //////////////////////////////useRef/////////////////////////////////
+
   let email1 = useRef(null);
   let password1 = useRef(null);
 
-  const [account, setAccount] = useState({ });
+  //////////////////////////////useNavigate/////////////////////////////////
 
-  const { email, password, sending } = account;
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    console.log(account);
+  //////////////////////////////useState/////////////////////////////////
+
+  const [account, setAccount] = useState({
+    email: "",
+    password: "",
+    errors: [],
   });
+  const [isSending, setisSending] = useState(false);
+  const { email, password } = account;
+
+  //////////////////////////////useEffect/////////////////////////////////
+
+  useEffect(() => {});
+
+  const uc = useContext(usersContext);
+
+  //////////////////////////////schema/////////////////////////////////
 
   let schema = yup.object().shape({
     email: yup.string().email().required(),
     password: yup.string().min(4).required(),
   });
+
+  //////////////////////////////return/////////////////////////////////
 
   return (
     <>
@@ -35,11 +56,8 @@ const Login = () => {
           <label htmlFor="email">Email:</label>
           <input
             value={email}
-            onChange={({ target }) => {
-              setAccount({ ...account, email: target.value });
-            }}
+            onChange={emailChange}
             ref={email1}
-            type="text"
             id="email11"
             className="form-control"
             type="text"
@@ -47,53 +65,86 @@ const Login = () => {
           <label htmlFor="password">Password:</label>
           <input
             value={password}
-            type="text"
+            type="password"
             id="password11"
             className="form-control"
-            type="password"
             ref={password1}
-            onChange={(event) => {
-              setAccount({ ...account, password: event.target.value });
-            }}
+            onChange={passwordChange}
           />
         </div>
-        <button disabled={sending} className="btn btn-primary ">
+        <button disabled={isSending} className="btn btn-primary ">
           Login
         </button>
       </form>
     </>
   );
+  //////////////////////////////emailChange/////////////////////////////////
+
+  function emailChange({ target }) {
+    let account1 = { ...account };
+    account1.email = target.value;
+    setAccount(account1);
+  }
+  //////////////////////////////passwordChange/////////////////////////////////
+
+  function passwordChange(event) {
+    let account1 = { ...account };
+    account1.password = event.target.value;
+    setAccount(account1);
+  }
+
+  //////////////////////////////handleSubmit/////////////////////////////////
 
   async function handleSubmit(event) {
     event.preventDefault();
-    setAccount({ ...account, sending: true });
-
-    //await validate();
+    setisSending(true);
+    await validate().then(async (res) => {
+      res && (await getApiResult());
+    });
   }
+
+  //////////////////////////////getApiResult/////////////////////////////////
 
   async function getApiResult() {
     let user = {
       email: email, // email1.current.value,
       password: password, //password1.current.value,
     };
+    let user1 = await axios
+      .post("https://reqres.in/api/login", user)
 
-    let user1 = await axios.post("https://reqres.in/api/login", user);
-    console.log(user1);
+      .then((res) => {
+        setAccount({ ...account, errors: [] });
+        setisSending(false);
+
+        localStorage.setItem("token", res.data.token);
+
+        uc.handleUser();
+        navigate("/dashboard", { replace: true });
+      })
+
+      .catch((er) => {
+        setAccount({ ...account, errors: [er.message] });
+        setisSending(false);
+      });
+    return user1;
   }
+
+  //////////////////////////////////validate/////////////////////////////
 
   async function validate() {
     try {
       await schema.validate(account, { abortEarly: false });
-      try {
-        await getApiResult();
-        setAccount({ ...account, errors: [] });
-      } catch (er) {
-        setAccount({ ...account, errors: [er.message] });
-      }
+      return true;
     } catch (error) {
-      setAccount({ ...account, errors: error.errors });
+      let accout1 = { ...account };
+      accout1.errors = error.errors;
+      setAccount(accout1);
+      setisSending(false);
+      return false;
     }
   }
+  //////////////////////////////////End/////////////////////////////
 };
 
 export default Login;
