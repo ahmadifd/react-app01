@@ -1,6 +1,6 @@
 import Product from "./product";
 import "../product.css";
-import { useContext ,useEffect} from "react";
+import { useContext, useEffect } from "react";
 import productContext from "../../context/products";
 
 function Products() {

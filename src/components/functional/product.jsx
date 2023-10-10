@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import "../product.css";
+import "./product.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useContext } from "react";
 import productContext from "../../context/products";
