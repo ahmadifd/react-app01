@@ -4,7 +4,8 @@ import Login from "./components/login";
 import Register from "./components/register";
 import Home from "./components/home";
 import User from "./components/user";
-
+import NotFound from "./components/notFound";
+import { redirect } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Route, Router, Routes } from "react-router-dom";
 
@@ -18,7 +19,10 @@ function App() {
           <Route path="/users" element={<Users />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/notFound" element={<NotFound />} />
+          <Route path="/customers" element={<Users />} />
           <Route path="/" element={<Home />} />
+          <Route path="/*" element={<NotFound />} />
         </Routes>
       </div>
     </>

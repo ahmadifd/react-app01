@@ -4,22 +4,26 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useLocation } from "react-router-dom";
 import queryString from "querystring";
+import { useNavigate } from "react-router-dom";
 
 const User = () => {
   const routeParams = useParams();
   const ulocation = useLocation();
+  const navigate = useNavigate();
+
   const [user, setuser] = useState({});
 
   useEffect(() => {
     getApiResult();
-    const qs=queryString.parse(ulocation.search);
-    console.log(ulocation.search,qs['?order'],qs['s']);
+    const qs = queryString.parse(ulocation.search);
+    console.log(ulocation.search, qs["?order"], qs["s"]);
   }, []);
   async function getApiResult() {
     let user1 = await axios.get(
       `https://reqres.in/api/users/${routeParams.id}`
     );
     setuser(user1.data.data);
+    console.log(navigate);
   }
   return (
     <div className="col-4 text-center p-5">
@@ -34,6 +38,14 @@ const User = () => {
       </h4>
 
       <h5>{user.email}</h5>
+      <button
+        onClick={() => {
+          navigate("/users", { replace: true });
+        }}
+        className="btn btn-info mt-3"
+      >
+        Users
+      </button>
     </div>
   );
 };

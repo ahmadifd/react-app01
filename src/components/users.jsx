@@ -18,7 +18,6 @@ const Users = () => {
     const result = await axios.get("https://reqres.in/api/users?page=1");
     setallusers(result.data.data);
     setisLoading(false);
-    console.log(result.data.data);
   }
 
   return (
