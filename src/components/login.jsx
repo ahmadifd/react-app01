@@ -12,10 +12,9 @@ const Login = () => {
 
   const { email, password, sending } = account;
 
-useEffect(()=>{
-  setAccount({...account , sending:false});
-  console.log(account);
-},[]);
+  useEffect(() => {
+    console.log(account);
+  });
 
   let schema = yup.object().shape({
     email: yup.string().email().required(),
@@ -69,7 +68,7 @@ useEffect(()=>{
     event.preventDefault();
     setAccount({ ...account, sending: true });
 
-    await validate();
+    //await validate();
   }
 
   async function getApiResult() {
@@ -83,12 +82,11 @@ useEffect(()=>{
   }
 
   async function validate() {
-      try {
+    try {
       await schema.validate(account, { abortEarly: false });
-      console.log(account);
       try {
         await getApiResult();
-        setAccount({ ...account, errors: []});
+        setAccount({ ...account, errors: [] });
       } catch (er) {
         setAccount({ ...account, errors: [er.message] });
       }
