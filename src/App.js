@@ -12,6 +12,8 @@ import Dashboard from "./components/dashboard";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import usersContext from "./context/userscontext";
+import Logout from "./components/logout";
+
 
 function App() {
   const [user, setuser] = useState(null);
@@ -60,7 +62,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/notFound" element={<NotFound />} />
-            <Route path="/customers" element={<Users />} />
+            <Route path="/logout" element={<Logout />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/" element={<Home />} />
             <Route path="/*" element={<NotFound />} />
