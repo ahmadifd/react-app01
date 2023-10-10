@@ -7,8 +7,12 @@ const Logout = () => {
   const uc = useContext(usersContext);
   const navigate = useNavigate();
   useEffect(() => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("userid");
+    if (localStorage.getItem("token")) {
+      localStorage.removeItem("token");
+    }
+    if (localStorage.getItem("userid")) {
+      localStorage.removeItem("userid");
+    }
     uc.handleUser();
     navigate("/", { replace: true });
   }, []);
