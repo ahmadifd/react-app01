@@ -31,7 +31,7 @@ const Navbar = (props) => {
                   Users
                 </NavLink>
               </li>
-              {props.user ? (
+              {props?.user ? (
                 <>
                   <li className="nav-item">
                     <NavLink className="nav-link" to="/dashboard">

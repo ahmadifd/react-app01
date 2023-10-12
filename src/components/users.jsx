@@ -100,6 +100,11 @@ const Users = () => {
   }
 
   async function handleDelete(id) {
+    // const users1 = allusers.filter((x) => {
+    //   if (x.id !== id) return true;
+    //   else return false;
+    // });
+
     const users = allusers.filter((x) => x.id !== id);
     const userapi = await axios.delete(`https://reqres.in/api/users/${id}`);
     setallusers(users);

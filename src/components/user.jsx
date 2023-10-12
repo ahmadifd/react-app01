@@ -5,6 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useLocation } from "react-router-dom";
 import queryString from "querystring";
 import { useNavigate } from "react-router-dom";
+import { useQuery } from "react-query";
 
 const User = (props) => {
   const routeParams = useParams();
@@ -12,6 +13,13 @@ const User = (props) => {
   const navigate = useNavigate();
 
   const [user, setuser] = useState({});
+
+  const qeury = useQuery("user", () => {
+    axios.get(`https://reqres.in/api/users/${routeParams.id}`).then((res) => {
+      setuser(res.data.data);
+      console.log(navigate);
+    });
+  });
 
   useEffect(() => {
     console.log(props);
