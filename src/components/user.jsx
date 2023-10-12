@@ -13,29 +13,44 @@ const User = (props) => {
   const navigate = useNavigate();
 
   const [user, setuser] = useState({});
+  const [iserror, setiserror] = useState(false);
 
-  const qeury = useQuery("user", () => {
+
+  const query = useQuery("user", () => {
     axios.get(`https://reqres.in/api/users/${routeParams.id}`).then((res) => {
       setuser(res.data.data);
-      console.log(navigate);
+      console.log("then");
+    })
+    .catch((er) => {
+      setuser({});
+      setiserror(true);
+      console.log("catch");
     });
   });
 
   useEffect(() => {
-    console.log(props);
-    getApiResult();
+    //getApiResult();
     const qs = queryString.parse(ulocation.search);
-    console.log(ulocation.search, qs["?order"], qs["s"]);
+    //console.log(ulocation.search, qs["?order"], qs["s"]);
   }, []);
-  async function getApiResult() {
-    let user1 = await axios.get(
-      `https://reqres.in/api/users/${routeParams.id}`
-    );
-    setuser(user1.data.data);
-    console.log(navigate);
-  }
+  // async function getApiResult() {
+  //   let user1 = await axios.get(
+  //     `https://reqres.in/api/users/${routeParams.id}`
+  //   );
+  //   setuser(user1.data.data);
+  //   console.log(navigate);
+  // }
 
-  return (
+  if (query.isLoading) {
+    console.log("isLoading");
+
+    return <h2>Loading ...</h2>;
+  }
+  else if (iserror) {
+    console.log("isError");
+    return <h2>Error</h2>;
+  }
+  else return (
     <div className="col-4 text-center p-5">
       <img
         src={user.avatar}

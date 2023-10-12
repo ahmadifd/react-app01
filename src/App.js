@@ -49,7 +49,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    console.log("user Changed");
+    //console.log("user Changed");
   }, [user]);
 
   return (
