@@ -12,20 +12,29 @@ const User = (props) => {
   const ulocation = useLocation();
   const navigate = useNavigate();
 
-  const [user, setuser] = useState({});
-  const [iserror, setiserror] = useState(false);
+  //const [user, setuser] = useState({});
+  const [next, setnext] = useState(false);
 
-
-  const query = useQuery("user", () => {
-    axios.get(`https://reqres.in/api/users/${routeParams.id}`).then((res) => {
-      setuser(res.data.data);
-      console.log("then");
-    })
-    .catch((er) => {
-      setuser({});
-      setiserror(true);
-      console.log("catch");
-    });
+  const {
+    data: apidata,
+    isLoading,
+    isError,
+    error,
+    refetch,
+  } = useQuery(["user"], () => {
+    setnext(!next);
+    return axios
+      .get(`https://reqres.in/api/users/${!next ? routeParams.id : 5}`)
+      .then(
+        (res) => res.data.data
+        //setuser(res.data.data);
+        // console.log("then");
+      );
+    // .catch((er) => {
+    //   // setuser({});
+    //   // setisError(true);
+    //   // console.log("catch");
+    // });
   });
 
   useEffect(() => {
@@ -41,28 +50,24 @@ const User = (props) => {
   //   console.log(navigate);
   // }
 
-  if (query.isLoading) {
-    console.log("isLoading");
+  if (isLoading) return <h2>Loading ...</h2>;
 
-    return <h2>Loading ...</h2>;
-  }
-  else if (iserror) {
-    console.log("isError");
-    return <h2>Error</h2>;
-  }
-  else return (
+  if (isError) return <h2>{error.message}</h2>;
+
+  return (
     <div className="col-4 text-center p-5">
       <img
-        src={user.avatar}
+        src={apidata?.avatar}
         style={{ borderRadius: "50%", width: "100px" }}
         alt=""
       />
 
       <h4>
-        {user.first_name} {user.last_name}
+        {apidata?.first_name} {apidata?.last_name}
       </h4>
 
-      <h5>{user.email}</h5>
+      <h5>{apidata?.email}</h5>
+
       <button
         onClick={() => {
           navigate("/users", { replace: true });
@@ -70,6 +75,9 @@ const User = (props) => {
         className="btn btn-info mt-3"
       >
         Users
+      </button>
+      <button onClick={refetch} className="mt-3 mx-3 btn btn-secondary">
+        Refetch
       </button>
     </div>
   );
