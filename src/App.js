@@ -16,7 +16,10 @@ import { BrowserRouter } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
 
 function App() {
-  const client = new QueryClient();
+  const client = new QueryClient({defaultOptions:{
+    queries:{refetchOnWindowFocus:false},
+    mutations :{}
+  }});
 
   const [user, setuser] = useState(null);
 
