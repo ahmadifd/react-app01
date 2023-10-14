@@ -83,7 +83,7 @@ function App() {
                 <Route path="/notFound/:name/:id?" element={<NotFound />} />
                 <Route path="/logout" element={<Logout />} />
                 <Route path="/shownumber" element={<Shownumber />} />
-                <Route path="/getuser" element={<GetUser />} />
+                {/* <Route path="/getuser" element={<GetUser />} /> */}
                 <Route path="/fastfoods" element={<FastFoods />} />
                 <Route path="/nfastfoods" element={<NFastFoods />} />
 
