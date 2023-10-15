@@ -19,7 +19,7 @@ import { Form } from "../components/app01/formreducer";
 import { Provider } from "react-redux";
 import { Contact } from "../components/app01/contact";
 import { Login2 } from "../components/app01/login2";
-import { store } from "../Store";
+import { store } from "../components/app01/Store";
 import { Link } from "react-router-dom";
 import UserRedux from "../components/app01/userredux";
 import UserRedux2 from "../components/app01/userredux2";

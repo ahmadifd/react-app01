@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+.btn {
+    background-color: rgb(20, 173, 233);
+    padding: 1rem 2rem;
+    outline: none;
+    border: none;
+    color: white;
+    font-weight: bold;
+    font-family: 'Lato', sans-serif;
+    letter-spacing: 2px;
+    cursor: pointer;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.title {
+    font-size: 2rem;
+}
+
+.body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+}
+
+.body_img {
+    width: 40%;
+}
+
+.body_title {
+    font-weight: bold;
+    font-size: 1.1rem;
+}

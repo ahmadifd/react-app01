@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { fCALL_API, fSUCCESS, fERROR } from "../../Store";
+import { fCALL_API, fSUCCESS, fERROR } from "./Store";
 
 const UserRedux = () => {
   const routeParams = useParams();
