@@ -13,7 +13,7 @@ import store from "../components/app03/redux/store";
 const App03 = () => {
   return (
     <>
-      return (
+     
       <Provider store={store}>
         <BrowserRouter>
           <div className="App">
@@ -24,7 +24,7 @@ const App03 = () => {
           </div>
         </BrowserRouter>
       </Provider>
-      );
+     
     </>
   );
 };
