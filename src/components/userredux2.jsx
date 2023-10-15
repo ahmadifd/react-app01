@@ -1,5 +1,4 @@
 import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getApi } from "../Store";
@@ -12,6 +11,7 @@ const UserRedux2 = () => {
   useEffect(() => {
     dispatch(getApi());
   }, []);
+
   if (selector.loading) {
     return (
       <>

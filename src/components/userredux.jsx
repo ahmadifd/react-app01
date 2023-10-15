@@ -1,35 +1,8 @@
-import { configureStore, createSlice } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-
-const userReduxSlice = createSlice({
-  name: "userredux",
-  initialState: {
-    data: {},
-    loading: false,
-    error: null,
-  },
-  reducers: {
-    fCALL_API: (state, action) => {
-      state.loading = true;
-    },
-    fSUCCESS: (state, action) => {
-      state.loading = false;
-      state.data = action.payload.data;
-    },
-    fERROR: (state, action) => {
-      state.loading = false;
-      state.error = action.payload.error;
-    },
-  },
-});
-
-const { fCALL_API, fSUCCESS, fERROR } = userReduxSlice.actions;
-export const userreduxstore = configureStore({
-  reducer: { userredux: userReduxSlice.reducer },
-});
+import { fCALL_API, fSUCCESS, fERROR } from "../Store";
 
 const UserRedux = () => {
   const routeParams = useParams();
