@@ -16,13 +16,21 @@ import { BrowserRouter } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
 import GetUser from "./components/getuserReducer";
 import { Form } from "./components/formreducer";
-
+import { Provider } from "react-redux";
+import { Contact } from "./components/contact";
+import { Login2 } from "./components/login2";
+import { store } from "./Store";
+import { Link } from "react-router-dom";
+import { userreduxstore } from "./components/userredux";
+import UserRedux from "./components/userredux";
 
 function App() {
-  const client = new QueryClient({defaultOptions:{
-    queries:{refetchOnWindowFocus:false},
-    mutations :{}
-  }});
+  const client = new QueryClient({
+    defaultOptions: {
+      queries: { refetchOnWindowFocus: false },
+      mutations: {},
+    },
+  });
 
   const [user, setuser] = useState(null);
 
@@ -60,6 +68,18 @@ function App() {
 
   return (
     <>
+      <div className="text-center border border-2 bg-light border-info rounded-5  m-3">
+           <h2>Header</h2>
+        <Provider store={userreduxstore}>
+          <BrowserRouter>
+      
+            <Link to="/userredux">login</Link>
+            <Routes>
+              <Route path="/userredux/:id?" element={<UserRedux />} />
+            </Routes>
+          </BrowserRouter>
+        </Provider>
+      </div>
       <usersContext.Provider
         value={{
           currentUser: user,
@@ -68,10 +88,6 @@ function App() {
       >
         <QueryClientProvider client={client}>
           <BrowserRouter>
-            <div className="text-center border border-2 bg-light border-info rounded-5  m-3">
-              <h2>Header</h2>
-            </div>
-
             <Navbar user={user} />
             <div className="container mt-3">
               <Routes>
@@ -82,7 +98,8 @@ function App() {
                 <Route path="/notFound/:name/:id?" element={<NotFound />} />
                 <Route path="/logout" element={<Logout />} />
                 <Route path="/form" element={<Form />} />
-
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/login2" element={<Login2 />} />
                 <Route path="/getuser/:id?" element={<GetUser />} />
                 <Route
                   path="/dashboard"
@@ -92,12 +109,21 @@ function App() {
                 <Route path="/*" element={<NotFound />} />
               </Routes>
             </div>
-            <div className="text-center border border-2 bg-light border-info rounded-5  m-3">
-              <h2>Footer</h2>
-            </div>
           </BrowserRouter>
         </QueryClientProvider>
       </usersContext.Provider>
+      <div className="text-center border border-2 bg-light border-info rounded-5  m-3">
+        <h2>Footer</h2>
+        <Provider store={store}>
+          <BrowserRouter>
+            <Link to="/login2">login</Link> |<Link to="/contact">contact</Link>
+            <Routes>
+              <Route path="/login2" element={<Login2 />} />
+              <Route path="/contact" element={<Contact />} />
+            </Routes>
+          </BrowserRouter>
+        </Provider>
+      </div>
     </>
   );
 }
