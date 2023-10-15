@@ -5,6 +5,7 @@ import SingleCocktail from "./components/app02/SingleCocktail";
 import Navbar from "./components/app02/navbar";
 import { store } from "./components/app02/redux/store";
 import { Provider } from "react-redux";
+import { FormRedux } from "./components/app02/formredux";
 
 const App02 = () => {
   return (
@@ -16,6 +17,7 @@ const App02 = () => {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/cocktail/:id?" element={<SingleCocktail />} />
+              <Route path="/form" element={<FormRedux />} />
             </Routes>
           </div>
         </BrowserRouter>

@@ -31,9 +31,14 @@ const Navbar = (props) => {
                 <NavLink
                   className="nav-link"
                   aria-current="page"
-                  to={`/cocktail${routeParams.id ?  '/' + routeParams.id : '' }`}
+                  to={`/cocktail${routeParams.id ? "/" + routeParams.id : ""}`}
                 >
                   SingleCocktail
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink className="nav-link" aria-current="page" to={`/form`}>
+                  Form
                 </NavLink>
               </li>
             </ul>

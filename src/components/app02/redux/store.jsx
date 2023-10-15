@@ -70,7 +70,6 @@ const cocktailSlice = createSlice({
     [fetchSearchCocktails.fulfilled]: (state, action) => {
       state.loading = false;
       state.cocktails = action.payload.drinks;
-      //state.cocktail  = {};
     },
     [fetchSearchCocktails.rejected]: (state, action) => {
       state.loading = false;
@@ -79,8 +78,54 @@ const cocktailSlice = createSlice({
   },
 });
 
+const formReduxSlice = createSlice({
+  name: "formReduxSlice",
+  initialState: {
+    title: "",
+    description: "",
+    price: 0,
+    category: "",
+    tags: [],
+    quantity: 0,
+    errors: [],
+  },
+  reducers: {
+    change_input: (state, action) => {
+      state[action.payload.data.name] = action.payload.data.value;
+    },
+    add_tag: (state, action) => {
+      state.tags = [...state.tags, action.payload.data];
+    },
+    remove_tag: (state, action) => {
+      state.tags = state.tags.filter((tag) => tag !== action.payload.data);
+    },
+    increase: (state, action) => {
+      state.quantity = state.quantity + 1;
+    },
+    decrease: (state, action) => {
+      state.quantity = state.quantity - 1;
+    },
+    error: (state, action) => {
+      state.errors = action.payload.data;
+    },
+    success: (state, action) => {
+      state.errors = [];
+    },
+  },
+});
+export const {
+  change_input,
+  add_tag,
+  remove_tag,
+  increase,
+  decrease,
+  error,
+  success,
+} = formReduxSlice.actions;
+
 export const store = configureStore({
   reducer: {
     app: cocktailSlice.reducer,
+    formReduxSlice: formReduxSlice.reducer,
   },
 });
