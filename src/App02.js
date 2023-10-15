@@ -14,18 +14,10 @@ const App02 = () => {
           <Navbar />
           <div className="container mt-3">
             <Routes>
-             
+              <Route path="/" element={<Home />} />
+              <Route path="/cocktail/:id?" element={<SingleCocktail />} />
             </Routes>
           </div>
-        </BrowserRouter>
-      </Provider>
-
-      <Provider store={store}>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/cocktail/:id?" element={<SingleCocktail />} />
-             <Route path="/" element={<Home />} />
-          </Routes>
         </BrowserRouter>
       </Provider>
     </>
