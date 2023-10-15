@@ -10,10 +10,7 @@ const SingleCocktail = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
 
-  console.log('SingleCocktail');
-
   useEffect(() => {
-    console.log('useEffect-[]',cocktail);
     dispatch(fetchSingleCocktail({ id }));
   }, []);
 
