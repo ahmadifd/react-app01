@@ -1,7 +1,7 @@
-import Navbar from "./components/app00/navbar";
-import Products from "./components/app00/products";
+import Navbar from "../components/app00/navbar";
+import Products from "../components/app00/products";
 import { useContext, useState, useEffect } from "react";
-import productContext from "./components/app00/context/products";
+import productContext from "../components/app00/context/products";
 
 function App00() {
   const [allproducts, setallProducts] = useState([
