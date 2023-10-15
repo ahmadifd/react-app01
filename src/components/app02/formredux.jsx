@@ -56,10 +56,8 @@ export const FormRedux = () => {
     try {
       await schema.validate(selector, { abortEarly: false });
       dispatch(success());
-      console.log("success", selector);
     } catch (er) {
       dispatch(error({ data: er.errors }));
-      console.log("error", selector);
     }
   }
   /////////////////////////////////////////////////////////////////////////////
