@@ -1,11 +1,11 @@
-import Home from "./components/app02/home";
+import Home from "../components/app02/home";
 import { BrowserRouter } from "react-router-dom";
 import { Route, Router, Routes } from "react-router-dom";
-import SingleCocktail from "./components/app02/SingleCocktail";
-import Navbar from "./components/app02/navbar";
-import { store } from "./components/app02/redux/store";
+import SingleCocktail from "../components/app02/SingleCocktail";
+import Navbar from "../components/app02/navbar";
+import { store } from "../components/app02/redux/store";
 import { Provider } from "react-redux";
-import { FormRedux } from "./components/app02/formredux";
+import { FormRedux } from "../components/app02/formredux";
 
 const App02 = () => {
   return (
