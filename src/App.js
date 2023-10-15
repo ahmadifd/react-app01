@@ -22,9 +22,14 @@ import { Login2 } from "./components/login2";
 import { store } from "./Store";
 import { Link } from "react-router-dom";
 import { userreduxstore } from "./components/userredux";
+
 import UserRedux from "./components/userredux";
+import UserRedux2 from "./components/userredux2";
+
+import { useParams } from "react-router-dom";
 
 function App() {
+  const routeParams = useParams();
   const client = new QueryClient({
     defaultOptions: {
       queries: { refetchOnWindowFocus: false },
@@ -69,13 +74,12 @@ function App() {
   return (
     <>
       <div className="text-center border border-2 bg-light border-info rounded-5  m-3">
-           <h2>Header</h2>
+        <h2>Header</h2>
         <Provider store={userreduxstore}>
           <BrowserRouter>
-      
-            <Link to="/userredux">login</Link>
             <Routes>
               <Route path="/userredux/:id?" element={<UserRedux />} />
+
             </Routes>
           </BrowserRouter>
         </Provider>
@@ -98,8 +102,8 @@ function App() {
                 <Route path="/notFound/:name/:id?" element={<NotFound />} />
                 <Route path="/logout" element={<Logout />} />
                 <Route path="/form" element={<Form />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/login2" element={<Login2 />} />
+              
+               
                 <Route path="/getuser/:id?" element={<GetUser />} />
                 <Route
                   path="/dashboard"
@@ -120,6 +124,7 @@ function App() {
             <Routes>
               <Route path="/login2" element={<Login2 />} />
               <Route path="/contact" element={<Contact />} />
+              <Route path="/userredux2/:id?" element={<UserRedux2 />} />
             </Routes>
           </BrowserRouter>
         </Provider>

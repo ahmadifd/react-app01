@@ -29,12 +29,14 @@ const GetUserReducer = (state, action) => {
 const GetUser = () => {
   const routeParams = useParams();
   const [state, dispatch] = useReducer(GetUserReducer, initialState);
+
   useEffect(() => {
     const getApi = async () => {
       dispatch({ type: ACTIONS.CALL_API });
-
       await axios
-        .get(`https://reqres.in/api/users/${routeParams.id ? routeParams.id : 5}`)
+        .get(
+          `https://reqres.in/api/users/${routeParams.id ? routeParams.id : 5}`
+        )
         .then((res) => {
           dispatch({ data: res.data.data, type: ACTIONS.SUCCESS });
         })
@@ -42,14 +44,13 @@ const GetUser = () => {
           dispatch({ error: er, type: ACTIONS.ERROR });
         });
     };
-
     getApi();
   }, []);
+
   if (state.loading) {
     console.log("loading");
     return (
       <>
-        {" "}
         <div>loading ...</div>
       </>
     );
@@ -57,7 +58,6 @@ const GetUser = () => {
 
   if (state.error) {
     console.log("error");
-
     return (
       <>
         <div className="alert alert-danger"></div>
@@ -69,7 +69,6 @@ const GetUser = () => {
   }
 
   console.log("success");
-
   return (
     <>
       <img

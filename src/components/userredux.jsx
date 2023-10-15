@@ -40,7 +40,9 @@ const UserRedux = () => {
     const getApi = async () => {
       dispatch(fCALL_API());
       await axios
-      .get(`https://reqres.in/api/users/${routeParams.id ? routeParams.id : 5}`)
+        .get(
+          `https://reqres.in/api/users/${routeParams.id ? routeParams.id : 5}`
+        )
         .then((res) => {
           dispatch(fSUCCESS({ data: res.data.data }));
         })
