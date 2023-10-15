@@ -1,4 +1,4 @@
-import productContext from "../../context/products";
+import productContext from "./context/products";
 import { useContext ,useEffect} from "react";
 
 

@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { getApi } from "../Store";
+import { getApi } from "../../Store";
 
 const UserRedux2 = () => {
   const routeParams = useParams();

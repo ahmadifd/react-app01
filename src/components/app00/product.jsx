@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import "./product.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useContext } from "react";
-import productContext from "../../context/products";
+import productContext from "./context/products";
 
 const Product = ({ productName, productCount, children, id }) => {
   useEffect(() => {
