@@ -15,6 +15,7 @@ import Logout from "./components/logout";
 import { BrowserRouter } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
 import GetUser from "./components/getuserReducer";
+import { Form } from "./components/formreducer";
 
 
 function App() {
@@ -80,7 +81,9 @@ function App() {
                 <Route path="/register" element={<Register />} />
                 <Route path="/notFound/:name/:id?" element={<NotFound />} />
                 <Route path="/logout" element={<Logout />} />
-                <Route path="/getuser" element={<GetUser />} />
+                <Route path="/form" element={<Form />} />
+
+                <Route path="/getuser/:id?" element={<GetUser />} />
                 <Route
                   path="/dashboard"
                   element={user ? <Dashboard /> : <Login />}

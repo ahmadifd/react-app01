@@ -1,12 +1,14 @@
 import axios from "axios";
 import { useReducer, useState } from "react";
 import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 const ACTIONS = {
   CALL_API: "call-api",
   SUCCESS: "success",
   ERROR: "error",
 };
+
 const initialState = {
   data: {},
   loading: false,
@@ -25,12 +27,14 @@ const GetUserReducer = (state, action) => {
 };
 
 const GetUser = () => {
+  const routeParams = useParams();
   const [state, dispatch] = useReducer(GetUserReducer, initialState);
   useEffect(() => {
     const getApi = async () => {
       dispatch({ type: ACTIONS.CALL_API });
+
       await axios
-        .get("https://reqres.in/api/users/2")
+        .get(`https://reqres.in/api/users/${routeParams.id ? routeParams.id : 5}`)
         .then((res) => {
           dispatch({ data: res.data.data, type: ACTIONS.SUCCESS });
         })
