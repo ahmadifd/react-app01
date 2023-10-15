@@ -8,13 +8,14 @@ const SingleCocktail = () => {
   const { cocktail, loading } = useSelector((state) => ({ ...state.app }));
   const [modifiedCocktail, setModifiedCocktail] = useState([]);
   const dispatch = useDispatch();
-  const { id  } = useParams();
+  const { id } = useParams();
 
   useEffect(() => {
     dispatch(fetchSingleCocktail({ id }));
   }, [id]);
 
   useEffect(() => {
+    console.log("SingleCocktail - useEffect[]");
     if (cocktail?.length > 0) {
       const {
         strDrink: name,
@@ -51,6 +52,9 @@ const SingleCocktail = () => {
       setModifiedCocktail(null);
     }
   }, []);
+  useEffect(() => {
+    console.log("SingleCocktail - useEffect[cocktail]");
+  }, [cocktail]);
 
   if (!modifiedCocktail) {
     return <h2>No Cocktail to Show</h2>;
