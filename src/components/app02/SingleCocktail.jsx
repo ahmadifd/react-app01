@@ -10,13 +10,16 @@ const SingleCocktail = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
 
-  useEffect(() => {
-    dispatch(fetchSingleCocktail({ id }));
-  }, [id]);
+  console.log('SingleCocktail');
 
   useEffect(() => {
-    console.log("SingleCocktail - useEffect[]");
-    if (cocktail?.length > 0) {
+    console.log('useEffect-[]',cocktail);
+    dispatch(fetchSingleCocktail({ id }));
+  }, []);
+
+  useEffect(() => {
+    console.log('useEffect-[cocktail]',cocktail);
+    if (cocktail.length > 0) {
       const {
         strDrink: name,
         strDrinkThumb: image,
@@ -30,7 +33,6 @@ const SingleCocktail = () => {
         strIngredient4,
         strIngredient5,
       } = cocktail[0];
-
       const ingredients = [
         strIngredient1,
         strIngredient2,
@@ -51,9 +53,6 @@ const SingleCocktail = () => {
     } else {
       setModifiedCocktail(null);
     }
-  }, []);
-  useEffect(() => {
-    console.log("SingleCocktail - useEffect[cocktail]");
   }, [cocktail]);
 
   if (!modifiedCocktail) {

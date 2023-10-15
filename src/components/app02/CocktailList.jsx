@@ -11,11 +11,11 @@ const CocktailList = () => {
 
   useEffect(() => {
     dispatch(fetchCocktails());
-    console.log('CocktailList-useEffect[]');
+    //console.log('CocktailList-useEffect[]');
   }, []);
 
   useEffect(() => {
-    console.log('CocktailList-useEffect[cocktails]');
+    //console.log('CocktailList-useEffect[cocktails]');
     if (cocktails) {
       const newCocktails = cocktails.map((item) => {
         const { idDrink, strDrink, strDrinkThumb, strAlcoholic, strGlass } =

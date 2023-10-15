@@ -1,6 +1,6 @@
 import { useReducer, useRef, useState } from "react";
 import * as yup from "yup";
-
+/////////////////////////////////////////////////////////////////////////////
 export const initialState = {
   title: "",
   description: "",
@@ -10,7 +10,7 @@ export const initialState = {
   quantity: 0,
   errors: [],
 };
-
+/////////////////////////////////////////////////////////////////////////////
 export const formReducer = (state, action) => {
   switch (action.type) {
     case "change_input":
@@ -36,17 +36,8 @@ export const formReducer = (state, action) => {
       return state;
   }
 };
-
+/////////////////////////////////////////////////////////////////////////////
 export const Form = () => {
-  // const [product, setProduct] = useState({
-  //   title: "",
-  //   description: "",
-  //   price: 0,
-  //   category: "",
-  //   tags: [],
-  //   quantity: 0,
-  // });
-
   let schema = yup.object().shape({
     title: yup.string().required(),
     description: yup.string().required(),
@@ -55,17 +46,17 @@ export const Form = () => {
     tags: yup.array().min(1).required(),
     quantity: yup.number().min(1).required(),
   });
-
+  /////////////////////////////////////////////////////////////////////////////
   const tagRef = useRef();
   const [state, dispatch] = useReducer(formReducer, initialState);
-
+  /////////////////////////////////////////////////////////////////////////////
   const handelInputChange = (event) => {
     dispatch({
       type: "change_input",
       data: { name: event.target.name, value: event.target.value },
     });
   };
-
+  /////////////////////////////////////////////////////////////////////////////
   const handelTags = () => {
     const tags = tagRef.current.value.split(",");
     console.log(tags, tagRef.current.value);
@@ -73,11 +64,12 @@ export const Form = () => {
       dispatch({ type: "add_tag", data: t });
     });
   };
+  /////////////////////////////////////////////////////////////////////////////
   async function handleSubmit(event) {
     event.preventDefault();
-
     await validate().then(async (res) => {});
   }
+  /////////////////////////////////////////////////////////////////////////////
   async function validate() {
     try {
       await schema.validate(state, { abortEarly: false });
@@ -90,7 +82,7 @@ export const Form = () => {
       return false;
     }
   }
-
+  /////////////////////////////////////////////////////////////////////////////
   return (
     <div>
       {state.errors && state.errors.length !== 0 && (

@@ -11,7 +11,7 @@ const root = createRoot(rootElement);
 root.render(
   <>
     {/* <React.StrictMode> */}
-    <App01 />
+    <App02 />
     {/* </React.StrictMode> */}
   </>
 );
