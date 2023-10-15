@@ -14,10 +14,8 @@ import usersContext from "./context/userscontext";
 import Logout from "./components/logout";
 import { BrowserRouter } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
-import Shownumber from "./components/shownumber";
-import { GetUser } from "./components/getuser";
-import FastFoods from "./components/fastfoods";
-import NFastFoods from "./components/nfastfoods";
+import GetUser from "./components/getuserReducer";
+
 
 function App() {
   const client = new QueryClient({defaultOptions:{
@@ -82,12 +80,7 @@ function App() {
                 <Route path="/register" element={<Register />} />
                 <Route path="/notFound/:name/:id?" element={<NotFound />} />
                 <Route path="/logout" element={<Logout />} />
-                <Route path="/shownumber" element={<Shownumber />} />
-                {/* <Route path="/getuser" element={<GetUser />} /> */}
-                <Route path="/fastfoods" element={<FastFoods />} />
-                <Route path="/nfastfoods" element={<NFastFoods />} />
-
-
+                <Route path="/getuser" element={<GetUser />} />
                 <Route
                   path="/dashboard"
                   element={user ? <Dashboard /> : <Login />}
