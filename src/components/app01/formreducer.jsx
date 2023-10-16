@@ -1,4 +1,5 @@
 import { useReducer, useRef, useState } from "react";
+import * as yup from "yup";
 
 export const initialState = {
   title: "",
@@ -7,6 +8,7 @@ export const initialState = {
   category: "",
   tags: [],
   quantity: 0,
+  errors: [],
 };
 
 export const formReducer = (state, action) => {
@@ -24,6 +26,12 @@ export const formReducer = (state, action) => {
       return { ...state, quantity: state.quantity + 1 };
     case "decrease":
       return { ...state, quantity: state.quantity - 1 };
+    case "error": {
+      return { ...state, errors: action.data };
+    }
+    case "success": {
+      return { ...state, errors: [] };
+    }
     default:
       return state;
   }
@@ -38,6 +46,16 @@ export const Form = () => {
   //   tags: [],
   //   quantity: 0,
   // });
+
+  let schema = yup.object().shape({
+    title: yup.string().required(),
+    description: yup.string().required(),
+    price: yup.number().min(1).required(),
+    category: yup.string().required(),
+    tags: yup.array().min(1).required(),
+    quantity: yup.number().min(1).required(),
+  });
+
   const tagRef = useRef();
   const [state, dispatch] = useReducer(formReducer, initialState);
 
@@ -55,11 +73,35 @@ export const Form = () => {
       dispatch({ type: "add_tag", data: t });
     });
   };
+  async function handleSubmit(event) {
+    event.preventDefault();
 
-  console.log(state);
+    await validate().then(async (res) => {});
+  }
+  async function validate() {
+    try {
+      await schema.validate(state, { abortEarly: false });
+      dispatch({ type: "success" });
+
+      return true;
+    } catch (error) {
+      console.log(error.errors);
+      dispatch({ type: "error", data: error.errors });
+      return false;
+    }
+  }
+
   return (
     <div>
-      <form>
+      {state.errors && state.errors.length !== 0 && (
+        <div className="alert alert-danger">
+          {state.errors.map((e, i) => {
+            return <li key={i}>{e}</li>;
+          })}
+        </div>
+      )}
+
+      <form onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="عنوان"
@@ -110,6 +152,7 @@ export const Form = () => {
             -
           </button>
         </div>
+        <button className="btn btn-primary mt-3">Submit</button>
       </form>
     </div>
   );

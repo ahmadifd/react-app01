@@ -9,7 +9,7 @@ const Home  = () => {
         <div className={styles.home}>
             <Header />
             <SearchInput />
-            <SingleCocktail />
+            
             <CocktailList />
         </div>
     )

@@ -137,6 +137,7 @@ const Login = ({ handleUser }) => {
       await schema.validate(account, { abortEarly: false });
       return true;
     } catch (error) {
+      console.log(error);
       let accout1 = { ...account };
       accout1.errors = error.errors;
       setAccount(accout1);
