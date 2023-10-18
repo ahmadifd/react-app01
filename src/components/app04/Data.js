@@ -1,6 +1,5 @@
-import { useGetAllProductsQuery } from "./store"
+import { useGetAllProductsQuery } from "./store";
 import React, { useState } from "react";
-
 
 export const Data = () => {
   const { data, error, isLoading, refetch } = useGetAllProductsQuery();
@@ -21,7 +20,7 @@ export const Data = () => {
       <label className="product-label">Products:</label>
       {productsData && productsData.length > 0 && (
         <ul>
-          {productsData.slice(0, 4).map((product) => (
+          {productsData.slice(0, 3).map((product) => (
             <li className="product-details" key={product.id}>
               <p>Name: {product.title}</p>
               <p>Description: {product.description}</p>
