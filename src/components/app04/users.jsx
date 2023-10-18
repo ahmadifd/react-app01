@@ -23,9 +23,9 @@ const Users = () => {
         usersData.map((item) => {
           return (
             <>
-              <div key={"dv" + item.id} className="col-4 text-center p-5">
+              <div keys={"dv" + item.id} className="col-4 text-center p-5">
                 <img
-                  key={"img" + item.id}
+                  keys={"img" + item.id}
                   src={item.avatar}
                   style={{ borderRadius: "50%", width: "100px" }}
                   alt=""
