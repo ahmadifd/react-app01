@@ -22,14 +22,33 @@ export const { useGetAllProductsQuery, useGetProductQuery } = productsApi;
 
 export const usersApi = createApi({
   reducerPath: "usersAp",
-  baseQuery: fetchBaseQuery({ baseUrl: "https://reqres.in/api/users" }),
+  baseQuery: fetchBaseQuery({ baseUrl: "https://reqres.in" }),
   endpoints: (builder) => ({
     getAllUsers: builder.query({
-      query: () => "?page=1",
+      query: () => "/api/users?page=1",
+    }),
+    getUser: builder.query({
+      query: (id) => `/api/users/${id}`,
+    }),
+    addUser: builder.mutation({
+      query: (data) => {
+        return { url: `/api/users`, body: { data }, method: "POST" };
+      },
+    }),
+    updateUser: builder.mutation({
+      query: (id, data) => {
+        return { url: `/api/users/${id}`, body: { data }, method: "PUT" };
+      },
+    }),
+    deleteUser: builder.mutation({
+      query: (id) => {
+        return { url: `/api/users/${id}`, method: "DELETE" };
+      },
     }),
   }),
 });
-export const { useGetAllUsersQuery } = usersApi;
+export const { useGetAllUsersQuery, useGetUserQuery, useAddUserMutation, useUpdateUserMutation,useDeleteUserMutation} =
+  usersApi;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
