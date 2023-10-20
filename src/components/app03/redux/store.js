@@ -61,7 +61,7 @@ const postSlice = createSlice({
   },
 
   reducers: {
-    setEdit: (state, action) => {
+    setEdit (state, action) {
       state.edit = action.payload.edit;
       state.body = action.payload.body;
     },

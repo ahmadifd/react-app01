@@ -28,14 +28,14 @@ const userReduxSlice = createSlice({
     error: null,
   },
   reducers: {
-    fCALL_API: (state, action) => {
+    fCALL_API (state, action)  {
       state.loading = true;
     },
-    fSUCCESS: (state, action) => {
+    fSUCCESS(state, action)  {
       state.loading = false;
       state.data = action.payload.data;
     },
-    fERROR: (state, action) => {
+    fERROR (state, action)  {
       state.loading = false;
       state.error = action.payload.error;
     },

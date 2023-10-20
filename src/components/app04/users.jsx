@@ -126,13 +126,17 @@ const Users = () => {
   }
 
   async function handleUpdate(id) {
-    let users = [...usersData];
-    let user = users.find((x) => x.id === id);
-    console.log(user);
-    user.first_name = "Farshad";
-    //user.last_name = "Ahmadi";
-    //UpdateUser(id,user);
-    //setUsersData(users);
+    const index = usersData.findIndex((x) => x.id === id);
+    let users1 = usersData.slice(0, index);
+    let users2 = usersData.slice(index + 1, usersData.length);
+
+    let updateuser = { ...usersData[index] };
+    updateuser.first_name = "Farshad";
+    updateuser.last_name = "Ahmadi";
+    UpdateUser(id, updateuser);
+    const users = [...users1, updateuser, ...users2];
+
+    setUsersData(users);
   }
 
   async function handleDelete(id) {

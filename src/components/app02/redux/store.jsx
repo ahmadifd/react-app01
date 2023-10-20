@@ -90,25 +90,25 @@ const formReduxSlice = createSlice({
     errors: [],
   },
   reducers: {
-    change_input: (state, action) => {
+    change_input(state, action) {
       state[action.payload.data.name] = action.payload.data.value;
     },
-    add_tag: (state, action) => {
+    add_tag(state, action) {
       state.tags = [...state.tags, action.payload.data];
     },
-    remove_tag: (state, action) => {
+    remove_tag(state, action) {
       state.tags = state.tags.filter((tag) => tag !== action.payload.data);
     },
-    increase: (state, action) => {
+    increase(state, action) {
       state.quantity = state.quantity + 1;
     },
-    decrease: (state, action) => {
+    decrease(state, action) {
       state.quantity = state.quantity - 1;
     },
-    error: (state, action) => {
+    error(state, action) {
       state.errors = action.payload.data;
     },
-    success: (state, action) => {
+    success(state, action) {
       state.errors = [];
     },
   },
