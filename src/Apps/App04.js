@@ -7,6 +7,7 @@ import Users from "../components/app04/users";
 import User from "../components/app04/user";
 import { Route, Router, Routes } from "react-router-dom";
 import { BrowserRouter } from "react-router-dom";
+import Home from "../components/app04/home";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
             <Route path="/" element={<Users />} />
             <Route path="/users" element={<Users />} />
             <Route path="/users/:id" element={<User />} />
+            <Route path="/home" element={<Home />} />
           </Routes>
         </div>
       </BrowserRouter>
